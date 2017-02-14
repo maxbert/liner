@@ -18,10 +18,12 @@ int main() {
   
   clear_screen(s);
 
-  draw_line(0,0,100,149,s,c);
-  draw_line(0,0,100,400,s,c);
-  draw_line(0,0,100,49,s,c);
-  draw_line(100,100,101,200,s,c);
-  //display(s);
+  draw_line(100,100,0,0,s,c);
+  draw_line(100,100,500,500,s,c);
+  draw_line(100,100,0,500,s,c);
+  draw_line(100,100,500,0,s,c);
+ 
+
+  display(s);
   save_extension(s, "lines.png");
 }  
