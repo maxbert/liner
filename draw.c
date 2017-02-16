@@ -68,6 +68,12 @@ void draw_lineHelper8(int x0, int y0, int x1, int y1, screen s, color c) {
     d += 2 * a;
   }
 }
+void draw_lineHelperV(int x0, int y0, int x1, int y1, screen s, color c) {
+  while(y0 < y1){
+    plot(s,c,x0,y0);
+    y0++;
+  }
+}
 
 //Insert your line algorithm here
 void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
@@ -76,22 +82,31 @@ void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
   int a = y1 - y0;
   int b = x0 - x1;
   int d = 2 * a + b;
-  if(dx > 0){// 1st half
-    if(dy > 0){//1st quartile
-      if(dx > dy){//1st octant
-	draw_lineHelper(x0,y0,x1,y1,s,c);
-      }else{//2nd octant
-	draw_lineHelper2(x0,y0,x1,y1,s,c);
-      }
-    }else{//4th quadrant
-      if(dx > (-1 * dy)){//8th octatn
-	draw_lineHelper8(x0,y0,x1,y1,s,c);
-      }else{//7th octant
-	draw_lineHelper7(x0,y0,x1,y1,s,c);
-      }
+  if(!dx){
+    if(dy > 0){
+      draw_lineHelperV(x0,y0,x1,y1,s,c);
+    }else{
+      draw_lineHelperV(x1,y1,x0,y0,s,c);
     }
-  }else{//2nd halg
-    draw_line(x1,y1,x0,y0,s,c);
-  }	
+  }else{
+    
+    if(dx > 0){// 1st half
+      if(dy > 0){//1st quartile
+	if(dx > dy){//1st octant
+	  draw_lineHelper(x0,y0,x1,y1,s,c);
+	}else{//2nd octant
+	  draw_lineHelper2(x0,y0,x1,y1,s,c);
+	}
+      }else{//4th quadrant
+	if(dx > (-1 * dy)){//8th octatn
+	  draw_lineHelper8(x0,y0,x1,y1,s,c);
+	}else{//7th octant
+	  draw_lineHelper7(x0,y0,x1,y1,s,c);
+	}
+      }
+    }else{//2nd halg
+      draw_line(x1,y1,x0,y0,s,c);
+    }
+  }
 }
 
